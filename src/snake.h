@@ -8,16 +8,18 @@ class Snake {
  public:
   enum class Direction { kUp, kDown, kLeft, kRight };
 
-  Snake(int grid_width, int grid_height)
-      : grid_width(grid_width),
+  Snake(int grid_width, int grid_height, float x_pos, float y_pos) // CHANGE - added x_pos and y_pos arguments to constructor
+      : grid_width(grid_width),                                    // to control the starting position of snake
         grid_height(grid_height),
-        head_x(grid_width / 2),
-        head_y(grid_height / 2) {}
+        head_x(grid_width * x_pos),
+        head_y(grid_height * y_pos) {}
 
   void Update();
 
   void GrowBody();
   bool SnakeCell(int x, int y);
+  int GetScore() const; // NEW - Getter function for score
+  void IncrementScore(); // NEW - Helper function to increase score
 
   Direction direction = Direction::kUp;
 
@@ -35,6 +37,7 @@ class Snake {
   bool growing{false};
   int grid_width;
   int grid_height;
+  int score{0}; // New - Score now a member of Class Snake
 };
 
 #endif
